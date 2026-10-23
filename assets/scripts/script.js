@@ -2,6 +2,8 @@ const lista = document.querySelector(".ex-list");
 const inputForm = document.querySelector("#inputForm");
 const headerSpan = document.querySelector(".header-span");
 const searchEx = document.querySelector("#searchEx");
+const selectStatus = document.querySelector("#selectStatus");
+const dayResearch = document.querySelector("#dayResearch");
 
 const allenamenti = [];
 
@@ -73,6 +75,7 @@ const render = (array = allenamenti) => {
     const editBtn = document.createElement("button");
     editBtn.textContent = "Modifica";
     editBtn.dataset.id = allenamento.id;
+    editBtn.dataset.action = "edit";
 
     const markedButton = document.createElement("button");
     if (allenamento.completed === false) {
@@ -81,10 +84,12 @@ const render = (array = allenamenti) => {
       markedButton.textContent = "Segna come da fare";
     }
     markedButton.dataset.id = allenamento.id;
+    markedButton.dataset.action = "toggle";
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Elimina";
     deleteBtn.dataset.id = allenamento.id;
+    deleteBtn.dataset.action = "delete";
 
     infoDiv.append(daySpan, serieSpan, repSpan, statSpan);
     actionsDiv.append(editBtn, deleteBtn, markedButton);
@@ -102,5 +107,46 @@ searchEx.addEventListener("input", (e) => {
   });
   console.log(filtered);
 
-  render(filtered)
+  render(filtered);
+});
+
+selectStatus.addEventListener("change", (e) => {
+  const status = e.target.value;
+  if (status === "Allstates") {
+    render();
+  } else if (status === "completed") {
+    render(allenamenti.filter((allenamento) => allenamento.completed));
+  } else if (status === "toDo") {
+    render(allenamenti.filter((allenamento) => !allenamento.completed));
+  }
+});
+
+dayResearch.addEventListener("change", (e) => {
+  const filterDay = e.target.value;
+  if (filterDay === "") {
+    render();
+    return;
+  }
+
+  render(allenamenti.filter((allenamento) => allenamento.giorno === filterDay));
+});
+
+lista.addEventListener("click", (e) => {
+  
+  const id = Number(e.target.dataset.id);
+  const action = e.target.dataset.action;
+  console.log(`Io sono ${action}`)
+  if (action === "delete") {
+    const index = allenamenti.findIndex((allenamento) => allenamento.id === id);
+    allenamenti.splice(index, 1);
+    render();
+  } else if (action === "toggle") {
+    const allenamento = allenamenti.find(
+      (allenamento) => allenamento.id === id,
+    );
+
+    allenamento.completed =!allenamento.completed
+
+    render()
+  }
 });
