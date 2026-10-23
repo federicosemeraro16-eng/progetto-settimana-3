@@ -259,6 +259,11 @@ footer{
   margin-top: 20px;
 }
 
+footer p{
+  text-align: center;
+  margin-top: 30px;
+}
+
 #notification-container{
   width: 30%;
   margin: 0 auto;
