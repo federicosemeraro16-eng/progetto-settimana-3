@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Piano di allenamento</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script type="module" src="assets/scripts/script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Il mio piano di allenamento</h1>
+        <p>
+          Organizza gli esercizi della settimana e tieni traccia dei tuoi
+          progressi
+        </p>
+      </div>
+      <button type="button">Passa alla Dark Mode</button>
+    </header>
+    <div class="container">
+      <main>
+        <form id="inputForm">
+          <div class="form-group">
+            <h2>Aggiungi un esercizio</h2>
+            <label for="inputEx">Esercizio </label>
+
+            <input
+              type="text"
+              placeholder="Es. Squat con bilanciere"
+              id="inputEx"
+              name="inputEx"
+            />
+          </div>
+          <div class="form-group">
+            <label for="daySelect">Giorno</label>
+            <select name="daySelect" id="daySelect">
+              <option value="" disabled selected>Scegli un'opzione</option>
+              <option value="lunedi">Lunedi</option>
+              <option value="marted">Martedi</option>
+              <option value="mercoled">Mercoledi</option>
+              <option value="giovedi">Giovedi</option>
+              <option value="venerdi">Venerdi</option>
+              <option value="sabato">Sabato</option>
+              <option value="domenica">Domenica</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="seriesInp">Serie</label>
+            <select name="seriesInp" id="seriesInp">
+              <option value="" disabled selected>Scegli un'opzione</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="repInp">Ripetizioni</label>
+            <select name="repInp" id="repInp">
+              <option value="" disabled selected>Scegli un'opzione</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+          </div>
+          <div class="btn-container">
+            <button type="submit">+ Aggiungi esercizio</button>
+            <span class="header-span">
+              Imposta serie e ripetizioni per il tuo prossimo allenamento
+            </span>
+          </div>
+        </form>
+
+        <section class="filterSec">
+          <div class="filterGroup">
+            <input
+              type="search"
+              placeholder="Cerca un esercizio ..."
+              id="searchEx"
+              name="searchEx"
+            />
+          </div>
+          <div class="filterGroup">
+            <select name="dayResearch" id="dayResearch">
+              <option value="" disabled selected>Ordina per giorni</option>
+              <option value="lun">Lunedi</option>
+              <option value="mar">Martedi</option>
+              <option value="mer">Mercoledi</option>
+              <option value="gio">Giovedi</option>
+              <option value="ven">Venerdi</option>
+              <option value="sab">Sabato</option>
+              <option value="dom">Domenica</option>
+            </select>
+          </div>
+          <div class="filterGroup">
+            <select name="selectStatus" id="selectStatus">
+              <option value="" disabled selected>Seleziona uno stato</option>
+              <option value="Allstates">Tutti gli stati</option>
+              <option value="completed">Completati</option>
+              <option value="toDo">Da fare</option>
+            </select>
+          </div>
+        </section>
+        <section class="statsSec">
+          <div class="number-box">
+            <p class="numPar" id="totalNumEx">0</p>
+            <span>Esercizi totali</span>
+          </div>
+          <div class="number-box">
+            <p class="numPar" id="completedNumEx">0</p>
+            <span>Completati</span>
+          </div>
+          <div class="number-box">
+            <p class="numPar" id="toDoCompleteNum">0</p>
+            <span>Da svolgere</span>
+          </div>
+          <div class="progress-container">
+            <progress class="progress-bar" max="100" value="50"></progress>
+            <span id="progressVal">0%</span>
+          </div>
+        </section>
+        <section class="table-sec">
+          <h2>La mia settimana</h2>
+          <ul class="ex-list"></ul>
+        </section>
+      </main>
+    </div>
+    <footer></footer>
+  </body>
+</html>
