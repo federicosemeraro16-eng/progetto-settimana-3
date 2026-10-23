@@ -8,6 +8,12 @@ const submitBtn = document.querySelector("#submitBtn");
 const notificationContainer = document.querySelector("#notification-container");
 const switchModeBtn = document.querySelector('#switchModeBtn')
 
+const totalNumEx = document.querySelector('#totalNumEx')
+const completedNumEx = document.querySelector('#completedNumEx')
+const toDoCompleteNum = document.querySelector('#toDoCompleteNum')
+const progressBar = document.querySelector('.progress-bar')
+const progressVal = document.querySelector('#progressVal')
+
 const allenamenti = [];
 let editingID = null;
 
@@ -22,7 +28,7 @@ inputForm.addEventListener("submit", (e) => {
   if (!nomeEx || !giorno || !serie || !ripetizioni) {
     headerSpan.textContent = "Inserire tutti i campi";
     return;
-  }
+}
 
   headerSpan.textContent =
     "Imposta serie e ripetizioni per il tuo prossimo allenamento";
@@ -47,6 +53,7 @@ inputForm.addEventListener("submit", (e) => {
   }
 
   render();
+  updateStats();
 
   inputForm.reset();
 });
@@ -68,7 +75,7 @@ const render = (array = allenamenti) => {
   lista.innerHTML = "";
 
   array.forEach((allenamento) => {
-    console.log(allenamento);
+    
     const newLi = document.createElement("li");
     newLi.textContent = allenamento.nome;
     const infoDiv = document.createElement("div");
@@ -124,7 +131,7 @@ searchEx.addEventListener("input", (e) => {
   const filtered = allenamenti.filter((allenamento) => {
     return allenamento.nome.toLowerCase().includes(searchTerm);
   });
-  console.log(filtered);
+  
 
   render(filtered);
 });
@@ -153,12 +160,13 @@ dayResearch.addEventListener("change", (e) => {
 lista.addEventListener("click", (e) => {
   const id = Number(e.target.dataset.id);
   const action = e.target.dataset.action;
-  console.log(`Io sono ${action}`);
+  
   if (action === "delete") {
     const index = allenamenti.findIndex((allenamento) => allenamento.id === id);
     allenamenti.splice(index, 1);
     showNotification('Esercizio eliminato')
     render();
+    updateStats();
   }
 
   if (action === "toggle") {
@@ -171,6 +179,8 @@ lista.addEventListener("click", (e) => {
     showNotification('Esercizio contrassegnato')
 
     render();
+    updateStats();
+    
   }
 
   if (action === "edit") {
@@ -206,3 +216,21 @@ switchModeBtn.addEventListener('click',(e)=>{
     switchModeBtn.textContent = "🌙 Modalità Scura";
   }
 })
+
+const updateStats =()=>{
+  const totalVal =allenamenti.length
+  const completedVal = allenamenti.filter((allenamento) => allenamento.completed===true).length
+  const toDoVal = totalVal -completedVal
+  totalNumEx.textContent = totalVal
+  completedNumEx.textContent = completedVal
+  toDoCompleteNum.textContent = toDoVal
+
+  let percentageProgress = 0;
+
+  if(totalVal > 0){
+    percentageProgress = Math.round((completedVal / totalVal)*100)
+  }
+
+  progressBar.value = percentageProgress
+  progressVal.textContent =`${percentageProgress} %`
+}

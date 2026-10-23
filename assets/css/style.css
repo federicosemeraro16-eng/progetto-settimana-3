@@ -206,6 +206,8 @@ ul{
   padding: 10px;
   
 }
+
+
 .info-Div{
   margin-top: 15px;
   margin-left: 10px;
@@ -254,6 +256,7 @@ ul{
 
 footer{
   height: 10vh;
+  margin-top: 20px;
 }
 
 #notification-container{
