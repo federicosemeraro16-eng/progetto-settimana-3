@@ -16,10 +16,11 @@
           progressi
         </p>
       </div>
-      <button type="button">Passa alla Dark Mode</button>
+      <button type="button" id="switchModeBtn">Passa alla Dark Mode</button>
     </header>
     <div class="container">
       <main>
+        
         <form id="inputForm">
           <div class="form-group">
             <h2>Aggiungi un esercizio</h2>
@@ -80,12 +81,13 @@
             </select>
           </div>
           <div class="btn-container">
-            <button type="submit">+ Aggiungi esercizio</button>
+            <button type="submit" id="submitBtn">+ Aggiungi esercizio</button>
             <span class="header-span">
               Imposta serie e ripetizioni per il tuo prossimo allenamento
             </span>
           </div>
         </form>
+        <div id="notification-container"></div>
 
         <section class="filterSec">
           <div class="filterGroup">

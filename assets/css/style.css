@@ -255,3 +255,41 @@ ul{
 footer{
   height: 10vh;
 }
+
+#notification-container{
+  width: 30%;
+  margin: 0 auto;
+}
+
+#notification-container span{
+  font-size: 0.8rem;
+  color: #44764e;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.dark-mode{
+  background-color: #202020;
+  color: #fff;
+}
+
+.dark-mode .form-group,
+.dark-mode .filterSec,
+.dark-mode .statsSec,
+.dark-mode .table-sec,
+.dark-mode #inputForm{
+  background-color: #333;
+  color: white;
+}
+
+.dark-mode input,
+.dark-mode select {
+  background-color: #444;
+  color: white;
+  border-color: #666;
+}
+
+.dark-mode li {
+  background-color: #3a3a3a;
+  color: white;
+}

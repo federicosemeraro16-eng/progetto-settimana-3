@@ -4,13 +4,15 @@ const headerSpan = document.querySelector(".header-span");
 const searchEx = document.querySelector("#searchEx");
 const selectStatus = document.querySelector("#selectStatus");
 const dayResearch = document.querySelector("#dayResearch");
+const submitBtn = document.querySelector("#submitBtn");
+const notificationContainer = document.querySelector("#notification-container");
+const switchModeBtn = document.querySelector('#switchModeBtn')
 
 const allenamenti = [];
+let editingID = null;
 
 inputForm.addEventListener("submit", (e) => {
   e.preventDefault();
-
-  console.log(headerSpan);
 
   const nomeEx = inputEx.value.trim();
   const giorno = daySelect.value;
@@ -25,7 +27,24 @@ inputForm.addEventListener("submit", (e) => {
   headerSpan.textContent =
     "Imposta serie e ripetizioni per il tuo prossimo allenamento";
 
-  createTraining(nomeEx, giorno, serie, ripetizioni);
+  if (editingID) {
+    const allenamento = allenamenti.find(
+      (allenamento) => allenamento.id === editingID,
+    );
+    allenamento.nome = nomeEx;
+    allenamento.giorno = giorno;
+    allenamento.serie = serie;
+    allenamento.ripetizioni = ripetizioni;
+
+    showNotification('Esercizio modificato')
+
+    editingID = null;
+    submitBtn.textContent = "+ Aggiungi esercizio";
+  } else {
+    createTraining(nomeEx, giorno, serie, ripetizioni);
+
+    showNotification('Esercizio aggiunto')
+  }
 
   render();
 
@@ -132,21 +151,58 @@ dayResearch.addEventListener("change", (e) => {
 });
 
 lista.addEventListener("click", (e) => {
-  
   const id = Number(e.target.dataset.id);
   const action = e.target.dataset.action;
-  console.log(`Io sono ${action}`)
+  console.log(`Io sono ${action}`);
   if (action === "delete") {
     const index = allenamenti.findIndex((allenamento) => allenamento.id === id);
     allenamenti.splice(index, 1);
+    showNotification('Esercizio eliminato')
     render();
-  } else if (action === "toggle") {
+  }
+
+  if (action === "toggle") {
     const allenamento = allenamenti.find(
       (allenamento) => allenamento.id === id,
     );
 
-    allenamento.completed =!allenamento.completed
+    allenamento.completed = !allenamento.completed;
 
-    render()
+    showNotification('Esercizio contrassegnato')
+
+    render();
+  }
+
+  if (action === "edit") {
+    const allenamento = allenamenti.find(
+      (allenamento) => allenamento.id === id,
+    );
+    editingID = id;
+    inputEx.value = allenamento.nome;
+    daySelect.value = allenamento.giorno;
+    seriesInp.value = allenamento.serie;
+    repInp.value = allenamento.ripetizioni;
+    submitBtn.textContent = "Salva modifiche";
+    
   }
 });
+
+const showNotification = (message) => {
+  notificationContainer.innerHTML = "";
+  const notification = document.createElement("span");
+  notification.setAttribute("class", "notification-span");
+  notification.textContent = message;
+  notificationContainer.appendChild(notification);
+  setTimeout(() => {
+    notification.remove();
+  }, 2000);
+};
+
+switchModeBtn.addEventListener('click',(e)=>{
+  document.body.classList.toggle('dark-mode')
+  if (document.body.classList.contains("dark-mode")) {
+    switchModeBtn.textContent = "☀️ Modalità Chiara";
+  } else {
+    switchModeBtn.textContent = "🌙 Modalità Scura";
+  }
+})
