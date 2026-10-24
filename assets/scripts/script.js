@@ -208,7 +208,7 @@ const showNotification = (message) => {
   }, 2000);
 };
 
-switchModeBtn.addEventListener('click',(e)=>{
+switchModeBtn.addEventListener('click',()=>{
   document.body.classList.toggle('dark-mode')
   if (document.body.classList.contains("dark-mode")) {
     switchModeBtn.textContent = "☀️ Modalità Chiara";

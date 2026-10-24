@@ -199,6 +199,12 @@ select::placeholder {
 
 ul{
   list-style-type: none;
+  text-align: center;
+    margin-top: 15px;
+    padding: 5px 3px;
+    border: 1px solid #e3e5de;
+    list-style-type: none;
+    border-radius: 5px;
 }
 .info-Div,
 .actions-Div{
@@ -221,8 +227,7 @@ ul{
 .actions-Div li{
   width: 100%;
   border-bottom: 10px solid #e3e5de;
-  border-top-left-radius: 30px;
-  border-left: 3px solid #202020;
+  
 }
 
 
@@ -231,7 +236,10 @@ ul{
   border-left: 3px solid #d3a00d;
 }
 
+.actions-Div{
+  margin-right: 15px;
 
+}
 .info-Div button,
 .actions-Div button{
   margin-top: 15px;
